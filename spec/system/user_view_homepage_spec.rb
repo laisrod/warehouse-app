@@ -5,7 +5,7 @@ describe 'Usuario visita tela inicial' do
     # Arrange 
 
     # Act
-    visit('/')
+    visit(root_path)
 
     # Assert
     expect(page).to have_content('Galpões e Estoque')
@@ -17,7 +17,7 @@ describe 'Usuario visita tela inicial' do
     Warehouse.create(name: 'Maceio', code: 'MCD', city: 'Maceio', area: 50_000)
 
     # Act
-    visit('/')
+    visit(root_path)
 
     # Assert
     expect(page).not_to have_content('Não existem galpões cadastrados')
@@ -35,9 +35,21 @@ describe 'Usuario visita tela inicial' do
     # Arrange
     
     # Act
-    visit('/')
+    visit(root_path)
 
     # Assert
     expect(page).to have_content('Não existem galpões cadastrados')
+  end
+
+  it 'e vê detalhes de um galpão' do
+    # Arrange   
+    Warehouse.create(name: 'Rio', code: 'SDU', city: 'Rio de Janeiro', area: 60_000)
+
+    # Act
+    visit(root_path)
+
+    # Assert
+    expect(page).to have_content('Rio')
+    expect(page).to have_content('Código: SDU')
   end
 end
