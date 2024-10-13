@@ -25,6 +25,7 @@ describe 'Usuario visita tela inicial' do
     expect(page).to have_content('Código: SDU')
     expect(page).to have_content('Cidade: Rio de Janeiro')
     expect(page).to have_content('60000 m²') 
+    
     expect(page).to have_content('Maceio')
     expect(page).to have_content('Código: MCD') 
     expect(page).to have_content('Cidade: Maceio') 
