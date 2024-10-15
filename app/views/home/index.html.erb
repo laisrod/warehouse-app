@@ -1,7 +1,10 @@
 <section id="warehouses">
   <h2>Galpões</h2>
   <div>
-    <%= link_to('Cadastrar Galpão', new_warehouse_path) %>
+    <%= flash[:notice] %>
+  </div>
+  <%= link_to('Cadastrar Galpão', new_warehouse_path) %>
+    </p>
   </div>
 <% @warehouses.each do |w| %>
   <div>

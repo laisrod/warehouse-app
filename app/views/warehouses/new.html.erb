@@ -1,6 +1,9 @@
 <h1>Novo Galpão</h1>
+    <% flash.each do |key, value| %>
+        <%= content_tag :div, value, class: key %>
+    <% end %>
 
-<%= form_with(model: Warehouse.new) do |f| %>
+<%= form_with(model: @warehouse) do |f| %>
     <div>
         <%= f.label :name , 'Nome' %>
         <%= f.text_field :name %>
