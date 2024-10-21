@@ -19,21 +19,16 @@ RSpec.describe 'Usuário vê modelos de produtos' do
     expect(current_path).to eq new_user_session_path
   end
 
-#  it 'a partir do menu' do
-#    # Arrange
-#    User.create!(name: "Joao", email: 'joao@gmail.com', password: 'password')
-#
-#   # Act
-#    visit root_path
-#    click_on 'Entrar'
-#    fill_in 'E-mail', with: 'joao@gmail.com'
-#    fill_in 'Senha', with: 'passwod'
-#    within('form') do
-#      click_on 'Entrar'
-#    end
-#    within('nav') do
-#      click_on 'Modelos de Produtos'
-#    end
+  it 'a partir do menu' do
+    # Arrange
+  user = User.create!(name: "Joao", email: 'joao@gmail.com', password: 'password')
+
+   # Act
+   login_as(user)
+    visit root_path
+    within('nav') do
+      click_on 'Modelos de Produtos'
+    end
 
     # Assert
     expect(current_path).to eq product_models_path
@@ -41,6 +36,7 @@ RSpec.describe 'Usuário vê modelos de produtos' do
 
   it 'com sucesso' do
     # Arrange
+    user = User.create!(name: "Joao", email: 'joao@gmail.com', password: 'password')
     supplier = Supplier.create!(brand_name: 'Samsung', corporate_name: 'Samsung Eletronics LTDA',
                                 registration_number: '12345678000123', 
                                 full_address: 'Av Nacoes Unidas, 1000',
@@ -52,6 +48,7 @@ RSpec.describe 'Usuário vê modelos de produtos' do
                          depth: 20, sku: 'SOU71-SAMSU-NOIZ77', supplier: supplier)
     
     # Act
+    login_as(user)
     visit root_path
     within('nav') do
       click_on 'Modelos de Produtos'
@@ -68,7 +65,9 @@ RSpec.describe 'Usuário vê modelos de produtos' do
 
   it 'e não existem produtos cadastrados' do
     # Arrange
+    user = User.create!(name: "Joao", email: 'joao@gmail.com', password: 'password')
     # Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     # Assert
