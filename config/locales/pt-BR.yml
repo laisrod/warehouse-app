@@ -1,2 +1,13 @@
 pt-BR:
-  hello: "Olá mundo"
+  activerecord:
+    models:
+      product_model: Modelo de Produto
+    attributes:
+        name: "Nome"
+        weight: "Peso"
+        height: "Altura"
+        width: "Largura"
+        depth: "Profundidade"
+        sku: "SKU"
+        supplier_id: "Fornecedor"
+

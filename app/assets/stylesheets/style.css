@@ -1,3 +1,7 @@
 body {
   background-color: lightgrey;
 }
+button {
+  border: 0;
+  background-color: #fff;
+}

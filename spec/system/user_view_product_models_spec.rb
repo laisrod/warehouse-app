@@ -1,14 +1,39 @@
 require 'rails_helper'
 
-describe 'Usuário vê modelos de produtos' do
-  it 'a partir do menu' do
-    # Arrange
+RSpec.describe 'Usuário vê modelos de produtos' do
+  let(:user) { User.create!(name: 'João', email: 'joaolucas@email.com', password: 'password123') }
 
+  before do
+    sign_in user
+  end
+
+  it 'se estiver autenticado' do
+    sign_out user # Garante que o usuário está deslogado
+    # Arrange
     # Act
     visit root_path
     within('nav') do
       click_on 'Modelos de Produtos'
     end
+    # Assert
+    expect(current_path).to eq new_user_session_path
+  end
+
+#  it 'a partir do menu' do
+#    # Arrange
+#    User.create!(name: "Joao", email: 'joao@gmail.com', password: 'password')
+#
+#   # Act
+#    visit root_path
+#    click_on 'Entrar'
+#    fill_in 'E-mail', with: 'joao@gmail.com'
+#    fill_in 'Senha', with: 'passwod'
+#    within('form') do
+#      click_on 'Entrar'
+#    end
+#    within('nav') do
+#      click_on 'Modelos de Produtos'
+#    end
 
     # Assert
     expect(current_path).to eq product_models_path
