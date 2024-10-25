@@ -33,9 +33,8 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
-  config.before(type: :system) do
-    driven_by(:rack_test)
-  end
+  config.include FactoryBot::Syntax::Methods
+  config.use_transactional_fixtures = true
   config.include Devise::Test::IntegrationHelpers, type: :system
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -70,4 +69,5 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  
 end
