@@ -43,13 +43,13 @@ describe 'Usuário cadastra um pedido' do
     click_on 'Registrar Pedido'
     select 'GRU - Aeroporto SP', from: 'Galpão Destino'
     select supplier.corporate_name, from: 'Fornecedor'
-    fill_in 'Data Prevista', with: 3.days.from_now.strftime('%d/%m/%Y')
+    fill_in 'Data Prevista', with: '20/12/2022'
     click_on 'Gravar'
 
     # Assert
     expect(page).to have_content 'Pedido registrado com sucesso'
     expect(page).to have_content 'Pedido ABC12345'
-    expect(page).to have_content 'Galpão Destino: GRU - Aeroporto SP'
+    expect(page).to have_text 'Galpão Destino: GRU - Aeroporto SP'
     expect(page).to have_content 'Fornecedor: ACME LTDA'
     expect(page).to have_content 'Usuário Responsavel: Sergio - sergio@email.com'
     expect(page).to have_content 'Data Prevista de Entrega: 20/12/2022'

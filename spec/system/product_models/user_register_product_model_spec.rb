@@ -28,7 +28,7 @@ describe 'Usuário cadastra um modelo de produto' do
     # Assert
     expect(page).to have_content 'Modelo de produto cadastrado com sucesso'
     expect(page).to have_content 'TV 40 polegadas'
-    expect(page).to have_content 'Fornecedor: Samsung'
+    expect(page).to have_text 'Fornecedor: Samsung'
     expect(page).to have_content 'SKU: TV40-SAMS-XPTO'
     expect(page).to have_content 'Dimensão: 60cm x 90cm x 10cm'
     expect(page).to have_content 'Peso: 10000g'

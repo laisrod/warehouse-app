@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
     order_params = params.require(:order).permit(:warehouse_id, :supplier_id, :estimated_delivery_date)
     @order = Order.new(order_params)
     @order.user = current_user
-    @order.code = 
     @order.save!
     redirect_to @order, notice: "Pedido registrado com sucesso."
   end
@@ -20,8 +19,6 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
   
-  def order_params
-    params.require(:order).permit(:code, :delivery_date, :warehouse_id, :supplier_id, :user_id)
-  end
+  
   
 end

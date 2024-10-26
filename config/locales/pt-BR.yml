@@ -10,4 +10,11 @@ pt-BR:
         depth: "Profundidade"
         sku: "SKU"
         supplier_id: "Fornecedor"
-
+    errors:
+      messages:
+        blank: "não pode ficar em branco"
+      models:
+        order:
+          attributes:
+            estimated_delivery_date:
+              future: "deve ser futura"
