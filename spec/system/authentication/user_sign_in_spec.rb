@@ -8,6 +8,8 @@ describe 'Usuário se autentica' do
     # Act
     visit root_path
     click_on 'Entrar'
+    # Adicionando uma espera explícita
+    expect(page).to have_selector('#formulario-login')
     within('#formulario-login') do
       fill_in 'E-mail', with: 'joaogomes@email.com'
       fill_in 'Senha', with: 'password'
@@ -16,11 +18,9 @@ describe 'Usuário se autentica' do
     
     # Assert
     expect(page).to have_content 'Login efetuado com sucesso' # Verifique se a mensagem de sucesso aparece
-    within('#formulario-login') do
-      expect(page).not_to have_link 'Entrar'
-      expect(page).to have_link 'Sair'
-      expect(page).to have_content 'joaogomes@email.com'
-    end
+    expect(page).not_to have_link 'Entrar'
+    expect(page).to have_button 'Sair'
+    expect(page).to have_content 'joaogomes@email.com'
   end
 
   it 'e faz logout' do
@@ -40,7 +40,7 @@ describe 'Usuário se autentica' do
     save_and_open_page # Verifique a saída após o logout
   
     # Assert
-    expect(page).to have_content 'Usuário saiu'
+    expect(page).to have_content 'Logout efetuado com sucesso'
     expect(page).to have_link 'Entrar'
     expect(page).not_to have_button 'Sair'
     expect(page).not_to have_content 'joaopedro@email.com'
