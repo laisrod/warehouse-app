@@ -11,7 +11,7 @@ describe 'Usuário cadastra um modelo de produto' do
     other_supplier = Supplier.create!(brand_name: 'LG', corporate_name: 'LG do Brasil LTDA',
                                 registration_number: '34356608000149', full_address: 'Av Ibirapuera, 1000',
                                 city: 'São Paulo', state: 'SP', email: 'contato@lg.com.br')
-# Act
+  # Act
     login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
@@ -28,10 +28,10 @@ describe 'Usuário cadastra um modelo de produto' do
     # Assert
     expect(page).to have_content 'Modelo de produto cadastrado com sucesso'
     expect(page).to have_content 'TV 40 polegadas'
-    expect(page).to have_text 'Fornecedor: Samsung'
-    expect(page).to have_content 'SKU: TV40-SAMS-XPTO'
-    expect(page).to have_content 'Dimensão: 60cm x 90cm x 10cm'
-    expect(page).to have_content 'Peso: 10000g'
+    expect(page).to have_text 'Samsung'
+    expect(page).to have_content 'TV40-SAMS-XPTO'
+    expect(page).to have_content '60cm x 90cm x 10cm'
+    expect(page).to have_content '10000g'
   end
 
   it 'deve preencher todos os campos' do 

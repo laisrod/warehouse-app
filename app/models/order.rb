@@ -3,8 +3,12 @@ class Order < ApplicationRecord
   belongs_to :supplier
   belongs_to :user
 
-  validates :code, :estimated_delivery_date, presence: true
+  validates :code, :estimated_delivery_date, presence: { message: 'não pode ficar em branco.' }
   validate :estimated_delivery_date_is_future
+  
+
+  before_validation :generate_code, on: :create
+
 
   before_create :generate_code
 
@@ -15,7 +19,7 @@ class Order < ApplicationRecord
   end
 
   def estimated_delivery_date_is_future
-    if self.estimated_delivery_date.presence? && self.estimated_delivery_date <= Date.today
+    if self.estimated_delivery_date && self.estimated_delivery_date <= Date.today
       self.errors.add(:estimated_delivery_date, " deve ser futura.")
     end
   end

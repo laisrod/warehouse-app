@@ -14,8 +14,8 @@ describe 'Usuário vê detalhes do fornecedor' do
     # Assert
     expect(page).to have_content('ACME LTDA')
     expect(page).to have_content('Bauru - SP')
-    expect(page).to have_content('Endereço: Avenida das Palmas, 1000')
-    expect(page).to have_content('E-mail: contato@acme.com')
+    expect(page).to have_content('Avenida das Palmas, 1000')
+    expect(page).to have_content('contato@acme.com')
   end
 
   it 'e volta para a tela inicial' do

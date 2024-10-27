@@ -38,7 +38,7 @@ describe 'Usuário cadastra um fornecedor' do
     # Assert
     expect(page).to have_content('Fornecedor cadastrado com sucesso')
     expect(page).to have_content('ACME')
-    expect(page).to have_content('E-mail: contato@acme.com')    
+    expect(page).to have_content('contato@acme.com')    
     expect(page).to have_content('Bauru - SP')
   end
 

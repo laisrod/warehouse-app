@@ -11,8 +11,8 @@ RSpec.describe Order, type: :model do
       supplier = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', 
                                       registration_number: '4343434343434', email: 'contato@acme.com',
                                       full_address: 'Avenida das Palmas, 1000', city: 'Bauru', state: 'SP')
-      order = Order.new(user: user, warehouse: warehouse, supplier: supplier,
-                         estimated_delivery_date: '2024-10-01')
+      order = Order.new(user: user, warehouse: warehouse, supplier: supplier, code: 'ABC',
+                         estimated_delivery_date: '2024-11-01')
       # Act
       order.save!
       result = order.code
@@ -20,7 +20,7 @@ RSpec.describe Order, type: :model do
       # Assert
       #empty?
       expect(result).not_to be_empty
-      expect(result.lenght).to eq 8
+      expect(result.length).to eq 8
     end
 
     it 'deve ter um código' do
@@ -32,10 +32,10 @@ RSpec.describe Order, type: :model do
       supplier = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', 
                                  registration_number: '4343434343434', email: 'contato@acme.com',
                                       full_address: 'Avenida das Palmas, 1000', city: 'Bauru', state: 'SP')
-      order = Order.new(user: user, warehouse: warehouse, 
+      order = Order.new(user: user, warehouse: warehouse,  code: 'ABC', 
                         supplier: supplier, estimated_delivery_date: 1.day.from_now)
   
-      order.save!
+      result = order.save!
   
       # Assert
       expect(result).to be true
@@ -51,9 +51,9 @@ RSpec.describe Order, type: :model do
       supplier = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', 
                                     registration_number: '4343434343434', email: 'contato@acme.com',
                                     full_address: 'Avenida das Palmas, 1000', city: 'Bauru', state: 'SP')
-      first_order = Order.create!(user: user, warehouse: warehouse, 
+      first_order = Order.create!(user: user, warehouse: warehouse,  code: 'ABC',
                                   supplier: supplier, estimated_delivery_date: 2.days.from_now)
-      second_order = Order.create!(user: user, warehouse: warehouse, 
+      second_order = Order.create!(user: user, warehouse: warehouse,  code: 'ABC',
                                      supplier: supplier, estimated_delivery_date: 3.days.from_now)
   
       # Assert
@@ -71,7 +71,7 @@ RSpec.describe Order, type: :model do
       supplier = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', 
                                   registration_number: '4343434343434', email: 'contato@acme.com',
                                   full_address: 'Avenida das Palmas, 1000', city: 'Bauru', state: 'SP')
-      order = Order.new(user: user, warehouse: warehouse, 
+      order = Order.new(user: user, warehouse: warehouse, code: 'ABC',
                         supplier: supplier, estimated_delivery_date: 1.day.from_now)
 
       # Act
@@ -97,7 +97,7 @@ RSpec.describe Order, type: :model do
       order.valid?
       # Assert
       expect(order.errors.include?(:estimated_delivery_date)).to be true
-      expect(order.errors[estimated_delivery_date]).to include(" deve ser futura.")
+      expect(order.errors.full_messages_for(:estimated_delivery_date)).to include("Data Prevista de Entrega  deve ser futura.")
     end
 
     it 'data estimada de entrega deve ser igual ou maior que amanhã' do

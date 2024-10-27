@@ -1,10 +1,17 @@
 <h1>Registrar Pedido</h1>
 
+<% if @order.errors.any? %>
+  <div class="error-messages">
+    <% @order.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
+    <% end %>
+  </div>
+<% end %>
+
 <%= form_with(model: @order) do |f| %>
   <div>
     <%= f.label :warehouse_id, 'Galpão Destino' %>
     <%= f.collection_select :warehouse_id, @warehouses, :id, :full_description %>
-
   </div>
   <div>
     <%= f.label :supplier_id, 'Fornecedor' %>
@@ -15,6 +22,5 @@
     <%= f.date_field :estimated_delivery_date %>
   </div>
   
-  <%= f.submit 'Gravar'%>
-
+  <%= f.submit 'Gravar' %>
 <% end %>

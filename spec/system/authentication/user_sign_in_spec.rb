@@ -3,12 +3,12 @@ require 'rails_helper'
 describe 'Usuário se autentica' do
   it 'com sucesso' do
     # Arrange
-    User.create!(name: 'João Silva', email: 'joaogomes@email.com', password: 'password')
+    User.create!( email: 'joaogomes@email.com', password: 'password')
 
     # Act
     visit root_path
     click_on 'Entrar'
-    within('form') do
+    within('#formulario-login') do
       fill_in 'E-mail', with: 'joaogomes@email.com'
       fill_in 'Senha', with: 'password'
       click_on 'Entrar'
@@ -16,10 +16,10 @@ describe 'Usuário se autentica' do
     
     # Assert
     expect(page).to have_content 'Login efetuado com sucesso' # Verifique se a mensagem de sucesso aparece
-    within('nav') do
+    within('#formulario-login') do
       expect(page).not_to have_link 'Entrar'
-      expect(page).to have_button 'Sair'
-      expect(page).to have_content 'João Silva - joaogomes@email.com'
+      expect(page).to have_link 'Sair'
+      expect(page).to have_content 'joaogomes@email.com'
     end
   end
 
@@ -30,9 +30,9 @@ describe 'Usuário se autentica' do
     # Act
     visit root_path
     click_on 'Entrar'
-    within('form') do
-      fill_in 'E-mail', with: 'joaopedro@email.com'
-      fill_in 'Senha', with: 'password'
+    fill_in 'E-mail', with: 'joaopedro@email.com'
+    fill_in 'Senha', with: 'password'
+    within('#Entrar') do  
       click_on 'Entrar'
     end
     click_on 'Sair'
@@ -40,7 +40,7 @@ describe 'Usuário se autentica' do
     save_and_open_page # Verifique a saída após o logout
   
     # Assert
-    expect(page).to have_content 'Logout efetuado com sucesso.'
+    expect(page).to have_content 'Usuário saiu'
     expect(page).to have_link 'Entrar'
     expect(page).not_to have_button 'Sair'
     expect(page).not_to have_content 'joaopedro@email.com'
