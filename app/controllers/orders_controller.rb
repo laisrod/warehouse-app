@@ -26,7 +26,10 @@ end
   end
 
   def search
-    @code = params["query"]
-    @order = Order.find_by(code: params["query"])
+    @query = params[:query]
+    @orders = Order.where('code LIKE ?', "%#{@query}%")
+    #puts @orders.inspect
+    #puts @query
+
   end
 end

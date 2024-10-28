@@ -6,9 +6,7 @@ class Order < ApplicationRecord
   validates :code, :estimated_delivery_date, presence: { message: 'não pode ficar em branco.' }
   validate :estimated_delivery_date_is_future
   
-
   before_validation :generate_code, on: :create
-
 
   before_create :generate_code
 

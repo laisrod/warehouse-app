@@ -4,6 +4,8 @@ pt-BR:
       order: Pedido
     attributes:
       order:
+      #one: Pedido
+      #other: Pedidos
         warehouse_id: "Galpão Destino"
         warehouse: "Galpão Destino"
         supplier_id: "Fornecedor"
