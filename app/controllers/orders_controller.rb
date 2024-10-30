@@ -1,8 +1,9 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_user_permission, only: [:show, :edit]
   
   def index
-    @orders = cuurent_user.orders
+    @orders = current_user.orders
   end
 
   def new
@@ -26,7 +27,6 @@ class OrdersController < ApplicationController
 end
 
   def show
-    @order = Order.find(params[:id])
   end
 
   def search
@@ -34,6 +34,36 @@ end
     @orders = Order.where('code LIKE ?', "%#{@query}%")
     #puts @orders.inspect
     #puts @query
+  end
 
+  def edit
+    @warehouses = Warehouse.all
+    @suppliers = Supplier.all
+  end
+
+  def update
+    order_params = params.require(:order).permit(:warehouse_id, :supplier_id, :estimated_delivery_date)
+    @order = Order.find(params[:id])
+    if @order.user != current_user
+      redirect_to root_path, alert: 'Você não possui acesso a este pedido'
+    else
+      if @order.update(order_params)
+        redirect_to @order, notice: 'Pedido atualizado com sucesso'
+      else
+        @warehouses = Warehouse.all
+        @suppliers = Supplier.all
+        flash.now[:alert] = 'Não foi possível atualizar o pedido'
+        render :edit
+      end
+    end
+  end
+
+  private
+
+  def check_user_permission
+    @order = Order.find(params[:id])
+    if @order.user != current_user
+      return redirect_to root_path, alert: 'Você não possui acesso a este pedido'
+    end
   end
 end
