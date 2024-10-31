@@ -4,8 +4,9 @@ Rails.application.routes.draw do
     resources :warehouses, only: [:show, :new, :create, :edit, :update, :destroy]
     resources :suppliers, only: [:index, :show, :new, :create, :edit, :update]
 
-    resources :orders, only: [:new, :create, :show, :index, :edit, :update] do
+    resources :orders do
       get 'search', on: :collection
+      patch :delivered, on: :member
     end
 
   authenticate :user do

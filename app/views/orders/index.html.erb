@@ -1,5 +1,12 @@
 <h1>Meus Pedidos</h1>
 
-<%= @orders.each do |order| %>
-    <%= render order %>
+<% @orders.each do |order| %>
+  <div>
+    <p>Código do Pedido: <%= link_to order.code, order_path(order.id) %></p>
+    <p>Galpão Destino: <%= order.warehouse.name %></p>
+    <p>Data Prevista: <%= order.estimated_delivery_date.strftime('%d/%m/%Y') %></p>
+    <p>Fornecedor: <%= order.supplier.corporate_name %></p>
+    <p>Usuário Responsável: <%= order.user.name %></p>
+    <p>Status: <%= order.status %></p>
+  </div>
 <% end %>

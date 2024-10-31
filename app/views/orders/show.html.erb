@@ -1,18 +1,35 @@
 <h1>Detalhes do Pedido</h1>
 <h2><%= Order.model_name.human %> <%= @order.code %></h2>
+
 <dl>
   <dt><%= Order.human_attribute_name(:warehouse_id) %>:</dt>
   <dd><%= @order.warehouse.full_description %></dd>
+  
   <dt><%= Order.human_attribute_name(:supplier_id) %>:</dt>
   <dd><%= @order.supplier.corporate_name %></dd>
-  <dt><%= Order.human_attribute_name (:user)%>:</dt>
+  
+  <dt><%= Order.human_attribute_name(:user_id) %>:</dt>
   <dd><%= @order.user.description %></dd>
-  <dt><%= Order.human_attribute_name (:estimated_delivery_date)%>:</dt>
+  
+  <dt><%= Order.human_attribute_name(:estimated_delivery_date) %>:</dt>
   <dd><%= I18n.localize(@order.estimated_delivery_date) %></dd>
+  
+  <dt><%= Order.human_attribute_name(:status) %>:</dt>
+  <dd><%= I18n.t(@order.status) %></dd>
 </dl>
+
+<% if @order.pending? %>
+  <%= button_to 'Marcar como Entregue', 
+                delivered_order_path(@order.id), 
+                method: :patch %>
+<% end %>
 
 <%= link_to 'Editar', edit_order_path(@order.id) %>
 
 <div>
   <strong>Fornecedor: </strong><%= @order.supplier.corporate_name %>
+</div>
+
+<div>
+  <strong>Data Prevista de Entrega: </strong><%= @order.estimated_delivery_date.strftime('%d/%m/%Y') %>
 </div>

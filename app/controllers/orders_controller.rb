@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_user_permission, only: [:show, :edit]
+  before_action :check_user_permission, only: [:show, :edit, :delivered]
   
   def index
     @orders = current_user.orders
@@ -56,6 +56,12 @@ end
         render :edit
       end
     end
+  end
+
+  def delivered
+    @order = Order.find(params[:id])
+    @order.delivered!
+    redirect_to @order, notice: 'Pedido marcado como entregue com sucesso'
   end
 
   private
