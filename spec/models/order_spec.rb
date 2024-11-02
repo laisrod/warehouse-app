@@ -5,14 +5,15 @@ RSpec.describe Order, type: :model do
     it 'ao criar um novo pedido' do
       # Arrange
       user = User.create!(name: 'Sergio', email: 'sergio@email.com', password: '12345678')
-      warehouse = Warehouse.create!(name: 'Santos Dumont', code: 'RIO', address: 'Endereço',
-                                    cep: '2500-000', city: 'Rio', area: 1000,
-                                    description: 'Alguma descrição')
+      warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', 
+                                  area: 100_000, address: 'Avenida do Aeroporto, 1000', 
+                                  cep: '15000-000', description: 'Galpão para cargas internacionais')
       supplier = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', 
-                                      registration_number: '4343434343434', email: 'contato@acme.com',
-                                      full_address: 'Avenida das Palmas, 1000', city: 'Bauru', state: 'SP')
-      order = Order.new(user: user, warehouse: warehouse, supplier: supplier, code: 'ABC',
-                         estimated_delivery_date: '2024-11-01')
+                                registration_number: '43447216000102', 
+                                full_address: 'Av das Palmas, 100', city: 'Bauru', 
+                                state: 'SP', email: 'contato@acme.com')
+      order = Order.new(user: user, warehouse: warehouse, supplier: supplier, 
+                       estimated_delivery_date: 2.days.from_now)
       # Act
       order.save!
       result = order.code

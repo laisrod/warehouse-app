@@ -18,3 +18,6 @@ pt-BR:
           attributes:
             estimated_delivery_date:
               future: "deve ser futura"
+  pending: 'Pendente'
+  delivered: 'Entregue'
+  canceled: 'Cancelado'

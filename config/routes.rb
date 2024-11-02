@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :orders do
       get 'search', on: :collection
       patch :delivered, on: :member
+      patch 'cancel', on: :member
     end
 
   authenticate :user do
