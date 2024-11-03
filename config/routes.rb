@@ -3,11 +3,15 @@ Rails.application.routes.draw do
   root to: 'home#index'
     resources :warehouses, only: [:show, :new, :create, :edit, :update, :destroy]
     resources :suppliers, only: [:index, :show, :new, :create, :edit, :update]
+    resources :product_models, only: [:index, :new, :create, :show]
 
     resources :orders do
       get 'search', on: :collection
-      patch :delivered, on: :member
-      patch 'cancel', on: :member
+      member do
+        patch :delivered
+        patch :cancel
+      end
+      resources :order_items, only: [:new, :create]
     end
 
   authenticate :user do

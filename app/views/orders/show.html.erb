@@ -20,9 +20,15 @@
 
 <h2>Itens do Pedido</h2>
 
-<% @order.order_items.each do |item| %>
-  <%= item.quantity %> x <%= item.product_model.name %> <br>
+<% if @order.order_items.any? %>
+  <% @order.order_items.each do |item| %>
+    <div>
+      <%= "#{item.quantity} x #{item.product_model.name}" %>
+    </div>
+  <% end %>
 <% end %>
+
+<%= link_to 'Adicionar Item', new_order_order_item_path(@order) %>
 
 <% if @order.pending? %>
   <%= button_to 'Marcar como Entregue', delivered_order_path(@order.id), method: :patch%>
