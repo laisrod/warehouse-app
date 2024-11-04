@@ -3,25 +3,15 @@ class Order < ApplicationRecord
   belongs_to :supplier
   belongs_to :user
   has_many :order_items
-  has_many :product_models, through: :order_items
-  
+  has_many :stock_products
 
   enum status: { pending: 0, delivered: 1, canceled: 2 }
 
-  def status_translation
-    case status
-    when 'pending' then 'Pendente'
-    when 'delivered' then 'Entregue'
-    when 'canceled' then 'Cancelado'
-    end
-  end
+  validates :code, presence: true, uniqueness: true
+  validates :estimated_delivery_date, presence: true
+  validate :estimated_delivery_date_is_future, on: :create
 
-  validates :code, :estimated_delivery_date, presence: { message: 'não pode ficar em branco.' }
-  validate :estimated_delivery_date_is_future
-  
   before_validation :generate_code, on: :create
-
-  before_create :generate_code
 
   private
 
@@ -30,8 +20,8 @@ class Order < ApplicationRecord
   end
 
   def estimated_delivery_date_is_future
-    if self.estimated_delivery_date.present? && self.estimated_delivery_date < Date.today
-      self.errors.add(:estimated_delivery_date, " deve ser futura.")
+    if self.estimated_delivery_date.present? && self.estimated_delivery_date <= Date.today
+      errors.add(:estimated_delivery_date, " deve ser futura.")
     end
   end
 end

@@ -18,6 +18,7 @@ pt-BR:
           attributes:
             estimated_delivery_date:
               future: "deve ser futura"
+              blank: "Data Prevista de Entrega não pode ficar em branco."
   pending: 'Pendente'
   delivered: 'Entregue'
   canceled: 'Cancelado'

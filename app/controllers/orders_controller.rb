@@ -30,10 +30,7 @@ end
   end
 
   def search
-    @query = params[:query]
-    @orders = Order.where('code LIKE ?', "%#{@query}%")
-    #puts @orders.inspect
-    #puts @query
+    @orders = Order.where('code LIKE ?', "%#{params[:query]}%")
   end
 
   def edit
@@ -59,10 +56,23 @@ end
   end
 
   def delivered
-    @order = Order.find(params[:id])
     @order.delivered!
-    redirect_to @order, notice: 'Pedido marcado como entregue com sucesso'
+    @order.order_items.each do |item|
+      item.quantity.times do
+        StockProduct.create!(order: @order, product_model: item.product_model,
+                             warehouse: @order.warehouse)
+      end
+    end
+
+    redirect_to @order, notice: 'Pedido marcado como entregue'
   end
+
+  def cancel
+    order = Order.find(params[:id])
+    order.update(status: :canceled)
+    redirect_to order
+  end
+
 
   private
 

@@ -1,8 +1,18 @@
-<h1>Resultados da Busca por: <%= @code %></h1>
-<p><%= @orders.count %> 
-<%= Order.model_name.human(count: @orders.count).downcase %>
-<%= t(:found, count: @orders.count) %></p>
+<h1>Resultados da Busca por: <%= params[:query] %></h1>
+<p><%= @orders.count %> pedido(s) encontrado(s)</p>
 
-<%= @orders.each do |order| %>
-  <%= render order %>
+<% @orders.each do |order| %>
+  <div>
+    <h3>Código: <%= link_to order.code, order_path(order) %></h3>
+    <dl>
+      <dt>Galpão Destino:</dt>
+      <dd><%= order.warehouse.full_description %></dd>
+      
+      <dt>Fornecedor:</dt>
+      <dd><%= order.supplier.corporate_name %></dd>
+      
+      <dt>Situação do Pedido:</dt>
+      <dd><%= I18n.t(order.status) %></dd>
+    </dl>
+  </div>
 <% end %>

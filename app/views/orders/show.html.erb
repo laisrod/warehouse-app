@@ -19,20 +19,21 @@
 </dl>
 
 <h2>Itens do Pedido</h2>
+<%= link_to 'Adicionar Item', new_order_order_item_path(@order.id) %>
 
-<% if @order.order_items.any? %>
-  <% @order.order_items.each do |item| %>
-    <div>
-      <%= "#{item.quantity} x #{item.product_model.name}" %>
-    </div>
-  <% end %>
+<% @order.order_items.each do |item| %>
+  <div>
+    <%= item.quantity %> x <%= item.product_model.name %>
+  </div>
 <% end %>
 
-<%= link_to 'Adicionar Item', new_order_order_item_path(@order) %>
-
 <% if @order.pending? %>
-  <%= button_to 'Marcar como Entregue', delivered_order_path(@order.id), method: :patch%>
-  <%= button_to 'Cancelar Pedido', cancel_order_path(@order.id), method: :patch %>
+  <%= button_to 'Cancelar Pedido', 
+                cancel_order_path(@order), 
+                method: :post %>
+  <%= button_to 'Marcar como Entregue', 
+                delivered_order_path(@order), 
+                method: :post %>
 <% end %>
 
 <%= link_to 'Editar', edit_order_path(@order.id) %>

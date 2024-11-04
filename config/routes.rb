@@ -5,16 +5,16 @@ Rails.application.routes.draw do
     resources :suppliers, only: [:index, :show, :new, :create, :edit, :update]
     resources :product_models, only: [:index, :new, :create, :show]
 
-    resources :orders do
-      get 'search', on: :collection
-      member do
-        patch :delivered
-        patch :cancel
-      end
+    resources :orders, only: [:index, :show, :new, :create, :edit, :update] do
+
       resources :order_items, only: [:new, :create]
+
+      get 'search', on: :collection
+      post 'delivered', on: :member
+      post 'cancel', on: :member
     end
 
-  authenticate :user do
-    resources :product_models, only: [:index, :new, :create, :show]
-  end
+    authenticate :user do
+      resources :product_models, only: [:index, :new, :create, :show]
+    end
 end
