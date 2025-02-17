@@ -1,33 +1,59 @@
-<h1>Novo Fornecedor</h1>
+<div class="container mt-4">
+  <h1 class="mb-4">Novo Fornecedor</h1>
 
-<%= form_with(model: @supplier) do |f| %>
-  <div>
-    <%= f.label :corporate_name %>
-    <%= f.text.field :corporate_name %>
-  </div>
-  <div>
-    <%= f.label :brand_name %>
-    <%= f.text.area :brand_name %>
-  </div>
-  <div>
-    <%= f.label :full_address %>
-    <%= f.text.field :full_address %>
-  </div>
-  <div>
-  <%= f.label :registration_number %>
-  <%= f.text.field :registration_number %>
-  </div>
-  <div>
-    <%= f.label :city %>
-    <%= f.text.field :city %>
-  </div>
-  <div>
-    <%= f.label :state %>
-    <%= f.text.field :state %>
-  </div>
-  <div>
-    <%= f.label :email %>
-    <%= f.text.field :email %>
-  </div>
+  <%= form_with(model: @supplier) do |f| %>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <%= f.label :corporate_name, class: "form-label" %>
+          <%= f.text_field :corporate_name, class: "form-control" %>
+        </div>
 
-<% end %>
+        <div class="mb-3">
+          <%= f.label :brand_name, class: "form-label" %>
+          <%= f.text_area :brand_name, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :full_address, class: "form-label" %>
+          <%= f.text_field :full_address, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :registration_number, class: "form-label" %>
+          <%= f.text_field :registration_number, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="mb-3">
+          <%= f.label :city, class: "form-label" %>
+          <%= f.text_field :city, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :state, class: "form-label" %>
+          <%= f.text_field :state, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :email, class: "form-label" %>
+          <%= f.text_field :email, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-12">
+        <%= f.submit 'Enviar', class: 'btn btn-outline-light d-inline-flex align-items-center' do %>
+          <i class="bi bi-send me-2"></i>
+          <span>Enviar</span>
+        <% end %>
+        <%= link_to suppliers_path, class: 'btn btn-outline-secondary ms-2 d-inline-flex align-items-center' do %>
+          <i class="bi bi-arrow-left me-2"></i>
+          <span>Voltar</span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

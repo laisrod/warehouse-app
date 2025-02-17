@@ -1,21 +1,32 @@
-<h1>Modelos de Produtos</h1>
+<div class="container mt-4">
+  <h1 class="mb-4">Modelos de Produtos</h1>
 
-<%= link_to 'Cadastrar Novo', new_product_model_path %>
-
-<% if @product_models.any? %>
-
-  <% @product_models.each do |pm| %>
-    <div>
-      <h2><%= pm.name %></h2>
-      <dl>
-        <dt>SKU</dt>
-        <dd><%= pm.sku %></dd>
-        <dt>Fornecedor</dt>
-        <dd><%= pm.supplier.brand_name %></dd>
-      </dl>
-    </div>
+  <%= link_to new_product_model_path, class: 'btn btn-outline-light mb-4 d-inline-flex align-items-center' do %>
+    <i class="bi bi-plus-circle me-2"></i>
+    <span>Cadastrar Novo</span>
   <% end %>
 
+  <% if @product_models.any? %>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <% @product_models.each do |pm| %>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h2 class="card-title h5"><%= pm.name %></h2>
+              <dl>
+                <dt class="text-muted">SKU</dt>
+                <dd><%= pm.sku %></dd>
+                <dt class="text-muted">Fornecedor</dt>
+                <dd><%= pm.supplier.brand_name %></dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   <% else %>
-  <p>Nenhum modelo de produto cadastrado</p>
-<% end %>
+    <div class="alert alert-info">
+      Nenhum modelo de produto cadastrado
+    </div>
+  <% end %>
+</div>

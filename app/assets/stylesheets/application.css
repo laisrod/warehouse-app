@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
+.hover-gray:hover {
+    color: #6c757d !important; /* cor cinza do Bootstrap */
+}

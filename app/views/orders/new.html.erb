@@ -1,11 +1,13 @@
-<h1>Registrar Pedido</h1>
+<div class="container mt-4 bg-dark text-white">
+  <h1>Registrar Pedido</h1>
 
-<% if @order.errors.any? %>
-  <div class="error-messages">
-    <% @order.errors.full_messages.each do |message| %>
-      <p><%= message %></p>
-    <% end %>
-  </div>
-<% end %>
+  <% if @order.errors.any? %>
+    <div class="error-messages">
+      <% @order.errors.full_messages.each do |message| %>
+        <p class="text-danger"><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
 
-<%= render 'form' %>
+  <%= render 'form' %>
+</div>

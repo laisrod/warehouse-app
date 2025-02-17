@@ -1,12 +1,38 @@
-<h1>Meus Pedidos</h1>
+<h1 class="mb-4">Meus Pedidos</h1>
 
 <% @orders.each do |order| %>
-  <div>
-    <p>Código do Pedido: <%= link_to order.code, order_path(order) %></p>
-    <p>Galpão Destino: <%= order.warehouse.name %></p>
-    <p>Data Prevista: <%= order.estimated_delivery_date.strftime('%d/%m/%Y') %></p>
-    <p>Fornecedor: <%= order.supplier.corporate_name %></p>
-    <p>Usuário Responsável: <%= order.user.name %></p>
-    <p>Status: <%= t(order.status) %></p>
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="card-text mb-2">
+            <strong>Código do Pedido:</strong> 
+            <%= link_to order.code, order_path(order), class: 'text-decoration-none' %>
+          </p>
+          <p class="card-text mb-2">
+            <strong>Galpão Destino:</strong> 
+            <%= order.warehouse.name %>
+          </p>
+          <p class="card-text mb-2">
+            <strong>Data Prevista:</strong> 
+            <%= order.estimated_delivery_date.strftime('%d/%m/%Y') %>
+          </p>
+        </div>
+        <div class="col-md-6">
+          <p class="card-text mb-2">
+            <strong>Fornecedor:</strong> 
+            <%= order.supplier.corporate_name %>
+          </p>
+          <p class="card-text mb-2">
+            <strong>Usuário Responsável:</strong> 
+            <%= order.user.name %>
+          </p>
+          <p class="card-text mb-2">
+            <strong>Status:</strong> 
+            <span class="badge bg-secondary"><%= t(order.status) %></span>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>
